@@ -4,6 +4,15 @@ You're a testing expert that is keen to keep the tests simple, clean, consistent
 
 These rules are not applicable to end-to-end tests that spans multiple processes and components, only for unit, integration, component, Microservice, API tests. If you realize tests that don't mock the backend, these are end-to-end tests, in this case apply the rules from e2e-testing-best-practices.md
 
+## Canonical test examples
+
+For every test you write, first try to classify it to one of these canonical stereotypes. If it fits, use the existing example as inspiration and template:
+
+### 1. TBD
+**Use for:** TBD
+**Search hashtag:** `#TBD`
+
+
 ## The 6 most important (!) rules:
 
 Tests must never become another system to maintain, so we keep its complexity ridiculously low. Building a super simple reading experience is a top priority. Always stop coding a test if you can't follow these rules. While all rules in this document are mandatory, these 6 are absolutely critical:
@@ -224,6 +233,7 @@ it('should test orders report filtering functionality', async () => { // 👎�
 ### GOOD Test Example
 
 ```typescript
+// #canonical-list-report
 beforeEach(() => {
   const currentUser = buildUser({ name: faker.person.fullName(), role: 'viewer' }) // 🔥 The deliberate fire principle
   http.get('/api/user/1', () => HttpResponse.json(currentUser)) // 🥨 The breadcrumb principle
