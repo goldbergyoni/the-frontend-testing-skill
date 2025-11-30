@@ -77,6 +77,22 @@ export default defineConfig((env) =>
               setupFiles: [".storybook/vitest.setup.ts"],
             },
           },
+          {
+            extends: true,
+            test: {
+              name: "browser",
+              include: [
+                "src/**/*.browser.test.ts",
+                "src/**/*.browser.test.tsx",
+              ],
+              browser: {
+                enabled: true,
+                provider: playwright(),
+                headless: true,
+                instances: [{ browser: "chromium" }],
+              },
+            },
+          },
         ],
       },
     })

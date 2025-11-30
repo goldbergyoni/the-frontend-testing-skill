@@ -9,6 +9,7 @@
     "test": "vitest",
     "test:unit": "vitest --project=unit",
     "test:storybook": "vitest --project=storybook",
+    "test:browser": "vitest --project=browser",
     "test:unit:ci": "vitest run --project=\"unit\" --reporter=verbose --reporter=junit --reporter=json --outputFile.json=./reports/unit-report.json --outputFile.junit=./reports/unit-report.xml --coverage --coverage.reporter=lcov --coverage.reportsDirectory=./coverage",
     "test:storybook:ci": "vitest run --project=\"storybook\" --reporter=verbose --reporter=junit --reporter=json --outputFile.json=./reports/storybook-report.json --outputFile.junit=./reports/storybook-report.xml --coverage --coverage.reporter=lcov --coverage.reportsDirectory=./coverage",
     "test:coverage": "vitest run --coverage",
@@ -88,7 +89,8 @@
     "vite": "7.0.5",
     "vite-plugin-checker": "0.10.1",
     "vite-tsconfig-paths": "5.1.4",
-    "vitest": "4.0.6"
+    "vitest": "4.0.6",
+    "vitest-browser-react": "^2.0.2"
   },
   "browserslist": {
     "production": [
