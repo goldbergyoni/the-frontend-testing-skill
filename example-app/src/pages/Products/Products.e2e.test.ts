@@ -17,12 +17,6 @@ test("Adding product to cart makes network call and shows confirmation dialog", 
 
   await page.goto("/products");
 
-  await page.evaluate(() => {
-    document
-      .querySelectorAll("vite-plugin-checker-error-overlay")
-      .forEach((el) => el.remove());
-  });
-
   await expect(
     page.getByRole("button", { name: "Add to cart" }).first()
   ).toBeVisible();
