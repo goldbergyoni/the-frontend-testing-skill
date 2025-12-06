@@ -5,7 +5,8 @@ const translations = {
   pages: {
     cart: {
       title: "List of selected products",
-      description: "These are all products that you yet chose (updated {{time}}).",
+      description:
+        "These are all products that you yet chose (updated {{time}}).",
     },
     wishlist: {
       title: "Your Wishlist",

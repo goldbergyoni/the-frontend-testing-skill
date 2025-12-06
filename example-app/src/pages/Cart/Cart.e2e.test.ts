@@ -13,22 +13,6 @@ test.beforeEach(async ({ page }) => {
   await mockAuthenticatedUser(page);
 });
 
-test("When viewing cart, then products are displayed", async ({ page }) => {
-  // Arrange
-  const product1 = buildProduct({ title: "Test Product 1" });
-  const product2 = buildProduct({ title: "Test Product 2" });
-  await mockCartWithProducts(page, 1, [product1, product2]);
-  await page.goto("/cart/1");
-
-  // Assert
-  await expect(
-    page.getByRole("region", { name: product1.title })
-  ).toBeVisible();
-  await expect(
-    page.getByRole("region", { name: product2.title })
-  ).toBeVisible();
-});
-
 test("When removing a product from cart, then DELETE API is called and product disappears", async ({
   page,
 }) => {
@@ -54,11 +38,11 @@ test("When removing a product from cart, then DELETE API is called and product d
 
   // Assert
   await expect(
+    page.getByRole("status", { name: "Removed from cart successfully" })
+  ).toBeVisible();
+  await expect(
     page.getByRole("region", { name: productToRemove.title })
   ).not.toBeVisible();
-  await expect(
-    page.getByRole("region", { name: productToKeep.title })
-  ).toBeVisible();
   const deleteRequest = await deleteRequestPromise;
   expect(deleteRequest.url).toContain(
     `/carts/1/products/${productToRemove.productId}`

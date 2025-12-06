@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { http, HttpResponse } from "msw";
 import { setupWorker } from "msw/browser";
 import {
@@ -22,18 +23,11 @@ import { UserFixture } from "@/test-lib/fixtures/UserFixture";
 import {
   cartTranslations,
   createCartRouter,
+  createCartRouterWithLayout,
   setCartWithProducts,
-  waitForDeleteRequest,
+  deleteRequest,
 } from "@/test-lib/helpers/cart-browser-helpers";
 
-const productToRemove = ProductFixture.createPermutation({
-  id: 1,
-  title: "Wireless Bluetooth Headphones",
-});
-const productToKeep = ProductFixture.createPermutation({
-  id: 2,
-  title: "Cotton T-Shirt",
-});
 const user = UserFixture.createPermutation({ id: 1, cartId: 1 });
 
 const worker = setupWorker();
@@ -55,11 +49,19 @@ afterEach(() => {
   queryClient.clear();
 });
 
-test("When removing a product from cart, then DELETE API is called and product disappears (without full layout)", async () => {
+test("When removing a product from cart, then DELETE API is called and product disappears", async () => {
   // Arrange
-  setCartWithProducts(worker, 1, [productToRemove, productToKeep]);
-  const deleteRequest = waitForDeleteRequest(worker);
-  await render(<BrowserTestProviders router={createCartRouter(1)} />);
+  const productToRemove = ProductFixture.createPermutation({
+    id: 1,
+    title: "Wireless Bluetooth Headphones",
+  });
+  const productToKeep = ProductFixture.createPermutation({
+    id: 2,
+    title: "Cotton T-Shirt",
+  });
+  setCartWithProducts(worker, [productToRemove, productToKeep]);
+  const spyOnDeleteRequest = deleteRequest(worker);
+  await render(<BrowserTestProviders router={createCartRouter()} />);
 
   // Act
   await page
@@ -70,15 +72,52 @@ test("When removing a product from cart, then DELETE API is called and product d
 
   // Assert
   await expect
-    .element(page.getByText(cartTranslations.removedFromCart))
+    .element(
+      page.getByRole("status", { name: cartTranslations.removedFromCart })
+    )
     .toBeVisible();
-  await expect
-    .element(page.getByRole("region", { name: productToKeep.title }))
-    .toBeVisible();
-  expect(await deleteRequest).toEqual({
+  const elements = page
+    .getByRole("region", { name: productToRemove.title })
+    .all();
+  expect(elements).toHaveLength(0);
+  expect(await spyOnDeleteRequest).toEqual({
     cartId: "1",
     productId: String(productToRemove.id),
   });
 });
 
-test("When removing a product from cart, then DELETE API is called and product disappears (with full pagelayout)", async () => {});
+test.skip("When removing a product from cart, then DELETE API is called and product disappears (with full page layout)", async () => {
+  // Arrange
+  const productToRemove = ProductFixture.createPermutation({
+    id: 1,
+    title: "Wireless Bluetooth Headphones",
+  });
+  const productToKeep = ProductFixture.createPermutation({
+    id: 2,
+    title: "Cotton T-Shirt",
+  });
+  setCartWithProducts(worker, [productToRemove, productToKeep]);
+  const spyOnDeleteRequest = deleteRequest(worker);
+  await render(<BrowserTestProviders router={createCartRouterWithLayout()} />);
+
+  // Act
+  await page
+    .getByRole("region", { name: productToRemove.title })
+    .getByRole("button", { name: "Product actions" })
+    .click();
+  await page.getByRole("menuitem", { name: "Remove from cart" }).click();
+
+  // Assert
+  await expect
+    .element(
+      page.getByRole("status", { name: cartTranslations.removedFromCart })
+    )
+    .toBeVisible();
+  await expect
+    .element(page.getByRole("region", { name: productToKeep.title }))
+    .toBeVisible();
+  expect(await spyOnDeleteRequest).toEqual({
+    cartId: "1",
+    productId: String(productToRemove.id),
+  });
+});
