@@ -3,6 +3,10 @@ import { initReactI18next } from "react-i18next";
 
 const translations = {
   pages: {
+    cart: {
+      title: "List of selected products",
+      description: "These are all products that you yet chose (updated {{time}}).",
+    },
     wishlist: {
       title: "Your Wishlist",
       description: "Products you've saved for later.",
@@ -18,25 +22,22 @@ const translations = {
     },
   },
   features: {
-    wishlist: {
+    carts: {
       item: {
+        quantity: "Quantity:",
         remove: "Remove",
+        "in-stock": "In stock",
+        "add-to-wishlist": "Add to wishlist",
+        "visit-page": "Visit page",
+        "removed-from-cart": "Removed from cart successfully",
+        "added-to-wishlist": "Added to wishlist successfully",
       },
       list: {
-        "empty-heading": "Your wishlist is empty",
-        "empty-description": "Start adding products you love to your wishlist!",
-        "empty-action": "Browse products",
+        subtotal: "Subtotal",
+        "shipping-info": "Shipping and taxes will be calculated at checkout.",
+        checkout: "Checkout",
+        "continue-shopping": "Continue shopping",
       },
-    },
-    products: {
-      categories: {
-        "women-clothing": "Women's clothing",
-        "men-clothing": "Men's clothing",
-        jewelery: "Jewelery",
-        electronics: "Electronics",
-      },
-    },
-    carts: {
       "add-to-cart": {
         button: "Add to cart",
         dialog: {
@@ -62,6 +63,24 @@ const translations = {
             description: "Please sign in to add products to your cart.",
           },
         },
+      },
+    },
+    wishlist: {
+      item: {
+        remove: "Remove",
+      },
+      list: {
+        "empty-heading": "Your wishlist is empty",
+        "empty-description": "Start adding products you love to your wishlist!",
+        "empty-action": "Browse products",
+      },
+    },
+    products: {
+      categories: {
+        "women-clothing": "Women's clothing",
+        "men-clothing": "Men's clothing",
+        jewelery: "Jewelery",
+        electronics: "Electronics",
       },
     },
   },

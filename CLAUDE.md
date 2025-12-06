@@ -18,6 +18,10 @@ No package manager or build tools have been configured yet. When setting up this
 - Type checking (TypeScript)
 - Linting and formatting tools
 
+## Testing Best Practices
+
+**⚠️ MANDATORY: When writing or modifying tests, you MUST follow all rules in [`example-app/testing-best-practices.md`](./example-app/testing-best-practices.md).** This file contains comprehensive testing guidelines that must be followed for all test code.
+
 ## Notes
 
 This CLAUDE.md should be updated as the project structure and tooling are established.

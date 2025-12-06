@@ -13,10 +13,10 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 
+import { useRemoveFromCart } from "@/features/carts/infrastructure/useRemoveFromCart";
 import { useCategoryLabel } from "@/features/products/presentation/useCategoryLabel";
 import { Category } from "@/features/products/types/Category";
 import { useWishlistStore } from "@/features/wishlist/infrastructure/useWishlistStore";
-import { useNotImplementedYetToast } from "@/lib/components/Toast/useNotImplementedYetToast";
 import { useToast } from "@/lib/components/Toast/useToast";
 import { moneyVO } from "@/lib/format/Money";
 import { useTranslations } from "@/lib/i18n/useTransations";
@@ -45,12 +45,14 @@ const CartItem = ({
   const t = useTranslations("features.carts.item");
   const categoryLabel = useCategoryLabel(category);
   const categoryColor = useSecondaryTextColor();
-  const notImplemented = useNotImplementedYetToast();
   const toast = useToast();
   const addToWishlist = useWishlistStore((state) => state.addToWishlist);
+  const [removeFromCart] = useRemoveFromCart();
 
   return (
     <Stack
+      role="region"
+      aria-label={title}
       direction={{ base: "column", md: "row" }}
       spacing={3}
       overflow="hidden"
@@ -121,7 +123,16 @@ const CartItem = ({
             size="sm"
           />
           <MenuList>
-            <MenuItem onClick={notImplemented} aria-label="Remove from cart">
+            <MenuItem
+              onClick={() => {
+                removeFromCart(id);
+                toast({
+                  title: t("removed-from-cart"),
+                  status: "success",
+                });
+              }}
+              aria-label="Remove from cart"
+            >
               {t("remove")}
             </MenuItem>
             <MenuItem

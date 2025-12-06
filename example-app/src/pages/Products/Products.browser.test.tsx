@@ -1,6 +1,5 @@
 /* eslint-disable no-restricted-imports */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
 import { http, HttpResponse } from "msw";

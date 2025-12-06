@@ -19,6 +19,7 @@ export default defineConfig(({ mode }) => ({
           useFlatConfig: true,
           lintCommand: 'eslint "./src/**/*.{ts,tsx}"',
         },
+        overlay: false,
       }),
     {
       name: "remove-msw-service-worker",

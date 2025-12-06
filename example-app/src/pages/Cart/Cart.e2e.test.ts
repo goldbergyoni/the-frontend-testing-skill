@@ -1,75 +1,66 @@
 import { expect, test } from "@playwright/test";
 
-test("displays cart with products", async ({ page }) => {
-  await page.route("**/carts/1", (route) =>
-    route.fulfill({
-      json: {
-        id: 1,
-        userId: 1,
-        date: "2020-01-01",
-        products: [
-          { productId: 1, quantity: 2 },
-          { productId: 2, quantity: 1 },
-        ],
-      },
-    })
-  );
+import {
+  buildProduct,
+  createDeleteRequestPromise,
+  mockAuthenticatedUser,
+  mockCartWithProducts,
+  resetProductIdCounter,
+} from "./Cart.e2e.helpers";
 
-  await page.route("**/products/1", (route) =>
-    route.fulfill({
-      json: {
-        id: 1,
-        title: "Test Product 1",
-        price: 99.99,
-        category: "men's clothing",
-        image: "https://example.com/img.jpg",
-      },
-    })
-  );
+test.beforeEach(async ({ page }) => {
+  resetProductIdCounter();
+  await mockAuthenticatedUser(page);
+});
 
-  await page.route("**/products/2", (route) =>
-    route.fulfill({
-      json: {
-        id: 2,
-        title: "Test Product 2",
-        price: 49.99,
-        category: "electronics",
-        image: "https://example.com/img2.jpg",
-      },
-    })
-  );
-
-  await page.route("**/users/1", (route) =>
-    route.fulfill({
-      json: {
-        id: 1,
-        username: "testuser",
-        email: "test@example.com",
-        name: { firstname: "Test", lastname: "User" },
-        phone: "123-456-7890",
-        address: {
-          city: "Test City",
-          street: "123 Test St",
-          number: 1,
-          zipcode: "12345",
-          geolocation: { lat: "0", long: "0" },
-        },
-      },
-    })
-  );
-
-  await page.goto("/");
-  await page.evaluate(() =>
-    localStorage.setItem("fake_store_is_authenticated", "true")
-  );
-
+test("When viewing cart, then products are displayed", async ({ page }) => {
+  // Arrange
+  const product1 = buildProduct({ title: "Test Product 1" });
+  const product2 = buildProduct({ title: "Test Product 2" });
+  await mockCartWithProducts(page, 1, [product1, product2]);
   await page.goto("/cart/1");
 
+  // Assert
   await expect(
-    page.getByRole("heading", { name: "List of selected products" })
+    page.getByRole("region", { name: product1.title })
   ).toBeVisible();
-  await expect(page.getByText("Test Product 1")).toBeVisible();
-  await expect(page.getByText("Test Product 2")).toBeVisible();
-  await expect(page.getByText("Quantity: 2")).toBeVisible();
-  await expect(page.getByRole("button", { name: "Checkout" })).toBeVisible();
+  await expect(
+    page.getByRole("region", { name: product2.title })
+  ).toBeVisible();
+});
+
+test("When removing a product from cart, then DELETE API is called and product disappears", async ({
+  page,
+}) => {
+  // Arrange
+  const productToRemove = buildProduct({
+    title: "Wireless Bluetooth Headphones",
+  });
+  const productToKeep = buildProduct({ title: "Cotton T-Shirt" });
+  await mockCartWithProducts(page, 1, [productToRemove, productToKeep]);
+  const deleteRequestPromise = createDeleteRequestPromise(
+    page,
+    1,
+    productToRemove.productId
+  );
+  await page.goto("/cart/1");
+
+  // Act
+  await page
+    .getByRole("region", { name: productToRemove.title })
+    .getByRole("button", { name: "Product actions" })
+    .click();
+  await page.getByRole("menuitem", { name: "Remove from cart" }).click();
+
+  // Assert
+  await expect(
+    page.getByRole("region", { name: productToRemove.title })
+  ).not.toBeVisible();
+  await expect(
+    page.getByRole("region", { name: productToKeep.title })
+  ).toBeVisible();
+  const deleteRequest = await deleteRequestPromise;
+  expect(deleteRequest.url).toContain(
+    `/carts/1/products/${productToRemove.productId}`
+  );
 });

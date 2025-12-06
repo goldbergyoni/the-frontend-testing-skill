@@ -98,7 +98,8 @@
         "continue-shopping": "Continue shopping",
         "add-to-wishlist": "Add to wishlist",
         "visit-page": "Visit page",
-        "added-to-wishlist": "Added to wishlist successfully"
+        "added-to-wishlist": "Added to wishlist successfully",
+        "removed-from-cart": "Removed from cart successfully"
       },
       "add-to-cart": {
         "button": "Add to cart",

@@ -1,9 +1,7 @@
-/* eslint-disable vitest/expect-expect */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable */
 
 import { test, expect } from "vitest";
-import { page, userEvent } from "vitest/browser";
+import { page } from "vitest/browser";
 import { render } from "vitest-browser-react";
 
 // Demo: Vitest browser mode shares context within a file (no test-level isolation)
@@ -15,7 +13,7 @@ test("Check user/password Login", async () => {
 
   await fillLoginDetails({ username: "john.doe", password: "password" }); // Creates an accessToken in local storage
 
-  // This code 👆 triggers a page redirect to '/login-successful'
+  // This action 👆 triggers a page redirect to '/login-successful'
 
   expect
     .element(page.getByRole("banner", { name: "Sign-in successful" }))
@@ -33,7 +31,7 @@ async function mockGetUserAPI() {
 }
 
 async function fillLoginDetails(p0?: { username: string; password: string }) {
-  throw new Error("Function not implemented.");
+  throw new Error("Function not implemented.", p0);
 }
 
 function Login() {

@@ -204,6 +204,8 @@ Add specially formatted comments throughout the codebase, where appropriate, for
 
 ## Testing Discipline
 
+**⚠️ MANDATORY: When writing or modifying tests, you MUST follow all rules in [`testing-best-practices.md`](./testing-best-practices.md).** This file contains comprehensive testing guidelines including the 6 most important rules, test structure, assertions, mocking, and DOM testing patterns. Violations should be reported by bullet number.
+
 | What           | AI CAN Do               | AI MUST NOT Do           |
 | -------------- | ----------------------- | ------------------------ |
 | Implementation | Generate business logic | Touch test files         |
