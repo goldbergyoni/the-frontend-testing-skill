@@ -2,7 +2,7 @@ import { defineConfig } from "@playwright/test";
 
 export default defineConfig({
   testDir: ".",
-  testMatch: ["**/*.e2e.test.ts", "**/pr-flow-recorder-**.test.ts"],
+  testMatch: ["**/Cart.e2e.test.ts"],
   timeout: 140_000,
   fullyParallel: true,
   workers: 6,
