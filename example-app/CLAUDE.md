@@ -245,3 +245,7 @@ Add specially formatted comments throughout the codebase, where appropriate, for
   - Error conditions that users might encounter
   - Edge cases that affect business logic (not just code coverage)
 - Each test should verify **distinct behavior**, not just different ways to trigger the same code path
+
+## Testing
+
+Testing is a core practice in this project. For planning, coding, or reviewing - consult the testing skill at `.claude/skills/testing/SKILL.md`. Follow the workflow in `.claude/skills/testing/test-workflow.md`.

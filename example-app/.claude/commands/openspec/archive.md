@@ -24,4 +24,8 @@ tags: [openspec, archive]
 **Reference**
 - Use `openspec list` to confirm change IDs before archiving.
 - Inspect refreshed specs with `openspec list --specs` and address any validation issues before handing off.
+
+## Testing Alignment
+
+Any spec creation, task planning, or tech design must align with the testing skill. Before finalizing this document, review `.claude/skills/testing/test-workflow.md` to ensure testing considerations are incorporated into your plan.
 <!-- OPENSPEC:END -->

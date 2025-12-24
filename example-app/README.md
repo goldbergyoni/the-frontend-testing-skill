@@ -46,3 +46,7 @@ As this is a draft demo project, contributions and feedback are welcome to help 
 ## License
 
 This project is licensed under the terms of the [MIT license](https://github.com/bartstc/vite-ts-react-template/blob/core/LICENSE).
+
+## Testing
+
+Testing is a core practice in this project. For planning, coding, or reviewing - consult the testing skill at `.claude/skills/testing/SKILL.md`. Follow the workflow in `.claude/skills/testing/test-workflow.md`.

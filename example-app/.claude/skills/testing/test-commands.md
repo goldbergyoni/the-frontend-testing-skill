@@ -1,60 +1,69 @@
-# 🚀 Start & Test Commands
+# 🔳 Common Commands
 
-Commands to start the application and run tests. Use these to get the system running for investigation, establish baseline by running tests before adding new ones, and verify your tests pass after writing them.
-
----
-
-## 🖥️ Start Commands
-
-Get the application running so you can investigate its behavior before writing tests.
-
-| Command | Description |
-|---------|-------------|
-| `pnpm dev` | Start development server on port 5173. Use this to navigate and inspect the app with Playwright MCP tools. |
-| `pnpm storybook` | Start Storybook on port 6006. Use this to view and test individual components in isolation. |
+Commands for starting the application, stopping it, and running tests. All commands are configured in [config.toml](./config.toml) to keep this skill system-agnostic.
 
 ---
 
-## 🧪 Test Commands
+## Application Commands
 
-Run tests to establish baseline before writing new tests, and again after writing to verify they pass.
+### Start the Application
 
-| Command | Description |
-|---------|-------------|
-| `pnpm test` | Run all tests (unit + storybook). Use as final verification. |
-| `pnpm test:unit` | Run unit tests only. Fast feedback during development. |
-| `pnpm test:storybook` | Run storybook component tests only. |
-| `pnpm test:coverage` | Run tests with coverage report. Use to measure test impact. |
+To start the application for testing or page inspection, use the command specified in:
 
-### CI Commands
-| Command | Description |
-|---------|-------------|
-| `pnpm test:unit:ci` | Unit tests with coverage and reports for CI pipelines. |
-| `pnpm test:storybook:ci` | Storybook tests with coverage and reports for CI pipelines. |
+**Config key:** `commands.app_start_command`
+
+### Stop the Application
+
+To stop the application (if required), use the command specified in:
+
+**Config key:** `commands.app_stop_command`
 
 ---
 
-## 📊 Coverage Tools
+## Test Commands
 
-Use after running tests to verify coverage improvements:
+### Run Tests
 
-```bash
-# Get overall project coverage
-mcp__test-coverage__coverage_summary
+To run the test suite, use the command specified in:
 
-# Get coverage for the specific file you're testing
-mcp__test-coverage__coverage_file_summary --filePath="src/features/auth/login.ts"
-```
+**Config key:** `commands.test_run_command`
 
 ---
 
-## 💡 Typical Flow
+## Application URLs
 
-```
-1. pnpm dev                    → Start app for investigation
-2. [Use Playwright MCP tools]  → Inspect page, network, console
-3. pnpm test                   → Run existing tests (baseline)
-4. [Write your tests]
-5. pnpm test                   → Verify new tests pass
-6. pnpm test:coverage          → Check coverage impact
-```
+### Frontend URL
+
+When navigating to pages for testing or analysis:
+
+**Config key:** `app.app_url`
+
+### API URL
+
+When documenting or mocking API endpoints:
+
+**Config key:** `app.api_url`
+
+---
+
+## Test Artifacts Location
+
+Where to save test plans, app analysis, and other artifacts:
+
+**Config keys:**
+- `paths.test_context_root_folder` - Base folder for test artifacts
+- `paths.test_context_folder_name` - Name of the artifacts folder
+
+---
+
+## Quick Reference
+
+| Purpose | Config Key |
+|---------|------------|
+| Start app | `commands.app_start_command` |
+| Stop app | `commands.app_stop_command` |
+| Run tests | `commands.test_run_command` |
+| App URL | `app.app_url` |
+| API URL | `app.api_url` |
+| Artifacts path | `paths.test_context_root_folder` |
+| Artifacts folder | `paths.test_context_folder_name` |

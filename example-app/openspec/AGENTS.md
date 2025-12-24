@@ -520,3 +520,11 @@ openspec archive <change-id> [--yes|-y]  # Mark complete (add --yes for automati
 ```
 
 Remember: Specs are truth. Changes are proposals. Keep them in sync.
+
+## Testing Integration
+
+Before finalizing specs or tasks, review testing requirements:
+
+- Skill: `.claude/skills/testing/SKILL.md`
+- Workflow: `.claude/skills/testing/test-workflow.md`
+- Patterns: `.claude/skills/testing/patterns-and-practices/`

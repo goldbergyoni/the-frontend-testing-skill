@@ -1,4 +1,16 @@
 {
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '📋 TESTING SKILL: Consult .claude/skills/testing/SKILL.md for planning, writing, or reviewing tests. Follow the workflow in .claude/skills/testing/test-workflow.md'"
+          }
+        ]
+      }
+    ]
+  },
   "permissions": {
     "allow": [
       "Bash(find:*)",

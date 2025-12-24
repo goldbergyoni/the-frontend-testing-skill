@@ -4,11 +4,11 @@ IMPORTANT: Apply these rules exclusively to system-wide end-to-end tests that sp
 
 ## Best Practices
 
-A.5. The test title should havesummarize the test flow in a short sentence. It should also describe a stakeholder, an action, and some expectations. For example, 'The user can purchase an item and post-purchase experience is valid'
+A.5. The test title should summarize the test flow in a short sentence. It should also describe a stakeholder, an action, and some expectations. For example, 'The user can purchase an item and post-purchase experience is valid'
 
 A.8. Important: Each test that is self-contained and never relies on other tests state or generated artifacts. Consequently, if a test depends on any state, it should create it itself or ensure it was created in a hook
 
-A.11. Its test should start with a fresh dedciated set of data that is created in beforeEach or during the test. Minimize assumption on existing states
+A.11. Each test should start with a fresh dedicated set of data that is created in beforeEach or during the test. Minimize assumption on existing states
 
 A.14. Test real user scenarios, simulating actual user behavior rather than testing technical implementation details
 

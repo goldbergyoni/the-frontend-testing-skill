@@ -20,4 +20,8 @@ Track these steps as TODOs and complete them one by one.
 
 **Reference**
 - Use `openspec show <id> --json --deltas-only` if you need additional context from the proposal while implementing.
+
+## Testing Alignment
+
+Any spec creation, task planning, or tech design must align with the testing skill. Before finalizing this document, review `.claude/skills/testing/test-workflow.md` to ensure testing considerations are incorporated into your plan.
 <!-- OPENSPEC:END -->

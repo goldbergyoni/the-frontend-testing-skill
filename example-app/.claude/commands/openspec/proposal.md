@@ -30,4 +30,8 @@ tags: [openspec, change]
 - Use `openspec show <id> --json --deltas-only` or `openspec show <spec> --type spec` to inspect details when validation fails.
 - Search existing requirements with `rg -n "Requirement:|Scenario:" openspec/specs` before writing new ones.
 - Explore the codebase with `rg <keyword>`, `ls`, or direct file reads so proposals align with current implementation realities.
+
+## Testing Alignment
+
+Any spec creation, task planning, or tech design must align with the testing skill. Before finalizing this document, review `.claude/skills/testing/test-workflow.md` to ensure testing considerations are incorporated into your plan.
 <!-- OPENSPEC:END -->

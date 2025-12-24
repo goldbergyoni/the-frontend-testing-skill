@@ -21,7 +21,7 @@ Before writing any test, you must understand what you're testing.
 
 ```bash
 # Navigate to the page
-mcp__playwright__browser_navigate --url="http://localhost:5173/your-route"
+mcp__playwright__browser_navigate --url="<app.app_url>/your-route"
 
 # Get accessibility tree - essential for finding proper locators
 mcp__playwright__browser_snapshot
@@ -82,8 +82,7 @@ Following [test-patterns.md](./test-patterns.md):
 ### Step 5: Run and Verify
 
 ```bash
-# Run tests
-pnpm test
+# Run tests (see commands.test_run_command in config.toml)
 
 # Check coverage impact
 mcp__test-coverage__get_diff_since_start --lcovPath="coverage/lcov.info"
@@ -115,11 +114,10 @@ Your testing work is complete when:
 ### Testing a Product List Component
 
 ```bash
-# 1. Start the app
-pnpm dev
+# 1. Start the app (see commands.app_start_command in config.toml)
 
 # 2. Navigate to page
-mcp__playwright__browser_navigate --url="http://localhost:5173/products"
+mcp__playwright__browser_navigate --url="<app.app_url>/products"
 
 # 3. Get element structure
 mcp__playwright__browser_snapshot
