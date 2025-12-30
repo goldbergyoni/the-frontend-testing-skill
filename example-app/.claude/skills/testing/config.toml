@@ -50,19 +50,22 @@ app_stop_command = "pids=$(lsof -ti tcp:5173); [ -n '$pids' ] && kill -9 $pids"
 # This is the primary command used after writing tests to verify they pass.
 test_run_command = "pnpm test"
 
+# Command to run the test suite with coverage reporting.
+# Use this when you need to generate coverage reports (lcov, html, etc.)
+test_run_command_with_coverage = "pnpm test:coverage"
+
 # Command to stage changes for git.
 git_stage_command = "git add -A"
 
 [paths]
-# Where to save test context artifacts (test plans, app analysis, etc.).
+# The parent directory Where to save test all test sessions context artifacts (test plans, app analysis, etc.)
 # Options:
-#   - "given": A main agent, or a spec-driven framework, will provide an already existing path
-#   - A custom path like "./test-context" or "./.claude/test-artifacts"
+#   - A custom path like "./test/.context"
 test_context_root_folder = "/test/context/"
 
-# Name of the folder within test_context_root_folder to store artifacts.
+# Name of a session-specific context folder to save artifacts of a single test session. This folder will be saved underneath test_context_root_folder.
 # This folder will contain: test-plan.md, app-analysis.md, test results, etc.
-test_context_folder_name_template = "{feature-or-task-name}-{digit suffix for uniqueness}"
+test_context_folder_name_template = "test-context-{feature-or-task-name}-{two digits suffix for uniqueness}"
 
 [app]
 # The base URL of the frontend application or API

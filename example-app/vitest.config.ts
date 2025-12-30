@@ -27,12 +27,7 @@ export default defineConfig((env) =>
         maxWorkers: 6,
         coverage: {
           provider: "istanbul",
-          reporter: [
-            "text",
-            "html",
-            "json",
-            ["lcov", { projectRoot: "./src" }],
-          ],
+          reporter: ["html", ["lcov", { projectRoot: "./src" }]],
           include: ["src/**/*.{ts,tsx}"],
           exclude: [
             "**/test-lib/*",

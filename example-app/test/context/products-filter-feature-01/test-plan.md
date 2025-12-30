@@ -177,11 +177,13 @@
 ### Product Fixtures
 
 Create test products with varying:
+
 - **Names**: Mix of brands, product types, generic terms
 - **Prices**: Range from $10 to $500 for comprehensive price testing
 - **Categories**: Various categories to ensure filter doesn't affect non-price/name fields
 
 Suggested fixture products:
+
 1. "Nike Running Shoes" - $129.99
 2. "Adidas Training Shoes" - $89.99
 3. "Cotton T-Shirt" - $24.99
@@ -201,27 +203,25 @@ Suggested fixture products:
 ### Helper Functions to Create
 
 Consider extracting helpers similar to Cart test:
+
 ```typescript
 function mockProductsAPI(worker: SetupWorker, products: IProduct[]) {
-  worker.use(
-    http.get(`${host}/products`, () =>
-      HttpResponse.json(products)
-    )
-  );
+  worker.use(http.get(`${host}/products`, () => HttpResponse.json(products)));
 }
 
 function openFiltersPopover() {
-  await page.getByRole('button', { name: 'Filters' }).click();
+  await page.getByRole("button", { name: "Filters" }).click();
 }
 
 function applyFilters() {
-  await page.getByRole('button', { name: 'Apply' }).click();
+  await page.getByRole("button", { name: "Apply" }).click();
 }
 ```
 
 ### Assertions Focus
 
 Focus on **external outcomes only**:
+
 - ✅ Product cards visible/not visible in DOM
 - ✅ Empty state component visible
 - ✅ Filter input values (visible to user)
@@ -232,6 +232,7 @@ Focus on **external outcomes only**:
 ### Test File Location
 
 Following project structure:
+
 - **File**: `/Users/goldbergyoni/solutions/frontend-testing-setup/example-app/src/pages/Products/Products-filter.browser.test.tsx`
 - Pattern: Page-level test since filtering affects entire page view
 - Name convention: `{Page}-{feature}.browser.test.tsx`

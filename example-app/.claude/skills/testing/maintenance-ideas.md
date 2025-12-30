@@ -12,15 +12,13 @@ http://localhost:5173/products
 
 # Ideas not to execute yet
 
-- Clarify that folder thing (sdd or not)
 - Task workflow is not respected
 - page-analysis conflicts, reads from previous folder
+- Put the verifier
+- Coverage command
 - Remove test write agent
 - When to implement the tests
 - Create failing tests in a file, not just titles
-- Test plan template - test type, framework, no priority, no coverage,
-- Coverage command
-- Put the verifier
 - Healer
 - Make agents return score
 - Manual instructions
