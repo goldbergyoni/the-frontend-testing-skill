@@ -1,14 +1,17 @@
 <!-- OPENSPEC:START -->
+
 # OpenSpec Instructions
 
 These instructions are for AI assistants working in this project.
 
 Always open `@/openspec/AGENTS.md` when the request:
+
 - Mentions planning or proposals (words like proposal, spec, change, plan)
 - Introduces new capabilities, breaking changes, architecture shifts, or big performance/security work
 - Sounds ambiguous and you need the authoritative spec before coding
 
 Use `@/openspec/AGENTS.md` to learn:
+
 - How to create and apply change proposals
 - Spec format and conventions
 - Project structure and guidelines
@@ -248,4 +251,6 @@ Add specially formatted comments throughout the codebase, where appropriate, for
 
 ## Testing
 
-Testing is a core practice in this project. For planning, coding, or reviewing - consult the testing skill at `.claude/skills/testing/SKILL.md`. Follow the workflow in `.claude/skills/testing/test-workflow.md`.
+Testing is a core practice in this project. For planning, coding, or reviewing - consult the testing skill at `.claude/skills/testing/SKILL.md`. Follow the workflow in `.claude/skills/testing/test-workflow.md` Follow the workflow in .claude/skills/testing/test-workflow.md. Crucially, follow the Double Gate 🌉 principle.'
+
+When using the test skill and the test planner - pass it the folder that is used to plan tasks so it can reuse it and put inside also the test context
