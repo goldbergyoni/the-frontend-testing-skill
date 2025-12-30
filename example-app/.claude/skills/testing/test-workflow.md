@@ -17,7 +17,9 @@ This document defines the mandatory sequence of steps for planning and writing t
 
 ## Workflow Steps
 
-### Step 1: During Task Planning
+### Step 1: During Task Planning — The Double Gate 🌉 Principle
+
+> **This is the crucial Double Gate 🌉 principle**: Test planning is the first task in each workflow, test verification is the last task/gate. No coding session should happen without these two gates/tasks
 
 When planning feature work or user stories (manually, using SDD framework, or any planning tool):
 
@@ -80,7 +82,7 @@ Before writing test code:
 
 ### Step 5: After Coding Tests
 
-**MANDATORY**: Invoke the test verifier agent to validate test quality.
+**MANDATORY**: Invoke the test verifier agent to validate test quality, fix based on its feedback
 
 ---
 

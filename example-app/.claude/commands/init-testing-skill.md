@@ -63,6 +63,8 @@ For each file found:
 ## Testing
 
 Testing is a core practice in this project. For planning, coding, or reviewing - consult the testing skill at `.claude/skills/testing/SKILL.md`. Follow the workflow in `.claude/skills/testing/test-workflow.md`.
+
+**Specifically, it is crucial to follow the Double Gate 🌉 principle in the test workflow.**
 ```
 
 ### 3. Detect SDD Framework

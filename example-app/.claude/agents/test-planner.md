@@ -50,7 +50,7 @@ The test session artifacts, including the test plan, but not only, should be sto
 
 ### Step 3: Measure Coverage Baseline
 
-1. Run tests using `config.commands.test_run_command`
+1. Run tests using `config.commands.test_run_command_with_coverage`. If this config key doesn't exist or empty, skip coverage capturing
 2. **Ensure all tests pass** - if tests fail, note this in the report
 3. Use `mcp__test-coverage__coverage_summary` tool to get coverage stats
 4. Record:
