@@ -1,2 +1,0 @@
-login-method: "custom-function" #user-password | refresh-token | custom-function
-login-url: "{url}/sign-in"

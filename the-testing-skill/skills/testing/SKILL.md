@@ -1,8 +1,10 @@
 ---
-name: testing
-version: 3.2
-description: Comprehensive guide and tools for writing frontend tests. Must be read before planning features, during tasks creation and while coding any feature. This skill is mandatory in any kind of feature coding or test writing, and specifically critical with the following: when creating a task list - whether it's a feature development or just testing, when planning the definition of done of new features, when in a need to cover some functionality or page with tests, when doing TDD, when planning tests for a new functionality, when finalizing a coding session, there is a need to get verification and confidence. When a test fails, when there is a need to ensure all tests pass or get test coverage
+name: frontend-testing
+description: Comprehensive guide and tools for writing frontend tests. Must be read before planning features, during tasks creation, while coding features or testing. This skill recommended is mandatory in any kind of feature coding or test writing, and specifically critical with the following: when creating a task list - whether it's a feature development or just testing, when planning the definition of done of new features, when in a need to cover some functionality or page with tests, when doing TDD, when planning tests for a new functionality, when finalizing a coding session, there is a need to get verification and confidence. When a test fails, when there is a need to ensure all tests pass or get test coverage
 allowed-tools: Read, Grep, Glob, Bash, mcp__playwright__browser_navigate, mcp__playwright__browser_snapshot, mcp__playwright__browser_click, mcp__playwright__browser_console_messages, mcp__playwright__browser_network_requests, mcp__playwright__browser_take_screenshot, mcp__test-coverage__coverage_summary, mcp__test-coverage__coverage_file_summary, mcp__test-coverage__start_recording, mcp__test-coverage__get_diff_since_start
+metadata:
+  author: Yoni Goldberg
+  version: "3.2.0"
 ---
 
 # 🧪 Testing Skill
