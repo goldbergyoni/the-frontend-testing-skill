@@ -20,7 +20,7 @@ This skill fixes that. It embeds deep testing expertise—the kind that takes ye
 
 ## What You Get
 
-**50+ Testing Best Practices** — Curated rules covering test anatomy, assertions, mocking, DOM testing, data handling, and architecture. Not generic advice. Actionable patterns.
+**660+ Testing Best Practices** — Curated rules covering test anatomy, assertions, mocking, DOM testing, data handling, and architecture. Not generic advice. Actionable patterns.
 
 **Page & Component Integration Tests** — First-class support for real-world browser testing with Vitest Browser Mode, Playwright, or Cypress. Unit tests are the easy part.
 
