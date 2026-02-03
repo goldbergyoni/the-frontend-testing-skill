@@ -118,7 +118,64 @@ For each file found:
       - Create integration tests if they don't exist for the page
   ````
 
-### 3. Detect SDD Framework
+### 3. Update SessionStart Hook
+
+Add the golden gate reminder to the SessionStart hook so it's shown at the beginning of every session.
+
+**Idempotency check**: Check if `.claude/settings.json` exists and already contains a SessionStart hook with the testing reminder. If it already contains the golden gate message, skip updating and note "SessionStart hook already configured" for the checklist.
+
+**Steps:**
+
+1. Check if `.claude/settings.json` exists in the project root
+2. If it doesn't exist, create it with the basic hook structure
+3. If it exists, read it and check if the SessionStart hook with testing reminder is already present
+4. If not present, add or update the SessionStart hook
+
+**Hook configuration to add:**
+
+The SessionStart hook should add this message to Claude's context at the start of every session:
+
+```
+**Testing Reminder**: This project follows the Double Gate 🌉 principle. For ANY task involving features or code changes:
+- First task: Create test plan (consult `.claude/skills/testing/test-workflow.md`)
+- Last task: Verify tests pass and meet quality standards
+
+Consult `.claude/skills/testing/SKILL.md` for full testing workflow guidance.
+```
+
+**Implementation:**
+
+Add this to `.claude/settings.json`:
+
+```json
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '**Testing Reminder**: This project follows the Double Gate 🌉 principle. For ANY task involving features or code changes:\n- First task: Create test plan (consult `.claude/skills/testing/test-workflow.md`)\n- Last task: Verify tests pass and meet quality standards\n\nConsult `.claude/skills/testing/SKILL.md` for full testing workflow guidance.'"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+**Merge behavior**: If `.claude/settings.json` already exists with other content:
+
+- Parse the existing JSON
+- If `hooks` key doesn't exist, add it with the SessionStart configuration above
+- If `hooks.SessionStart` doesn't exist, add it
+- If `hooks.SessionStart` exists, check if our testing reminder hook is already present:
+  - If present (check for "Double Gate" in the command), skip
+  - If not present, append our hook to the existing SessionStart hooks array
+
+Report to the user which action was taken: created new file, updated existing file, or skipped (already configured).
+
+### 4. Detect SDD Framework
 
 Check for these spec-driven development frameworks:
 
@@ -131,7 +188,7 @@ Check for these spec-driven development frameworks:
 
 Report which framework found (or "none detected").
 
-### 4. Update SDD Framework Files (if detected)
+### 5. Update SDD Framework Files (if detected)
 
 **Idempotency check**: Check if the framework's AGENTS.md contains `## Testing Integration`. If it already has this section, skip updating and note "already integrated" for the checklist.
 
@@ -164,7 +221,7 @@ Any spec creation, task planning, or tech design must align with the testing ski
 | BMAD      | `bmad/templates/*.md` or `.bmad/templates/*.md`       |
 | AgentOS   | `agentos/templates/*.md` or `.agentos/templates/*.md` |
 
-### 5. Output Setup Checklist
+### 6. Output Setup Checklist
 
 Before outputting the summary, also check:
 
@@ -180,6 +237,7 @@ Print this checklist followed by the summary:
 ✅ secrets.toml exists (or ❌ Missing - copy from secrets.example.toml)
 ✅ Skill folder exists (or ❌ Missing - install testing skill first)
 ✅ Project memory references skill (or ❌ Not referenced - run memory files step)
+✅ SessionStart hook configured (or ❌ Not configured - run SessionStart hook step)
 ✅ SDD framework integrated (or ⏭️ No SDD framework detected)
 ```
 
@@ -194,6 +252,9 @@ Then print the detailed summary:
 ### Memory Files Updated:
 - [list each file updated, or "none found", or "already references skill"]
 
+### SessionStart Hook:
+- [report: "configured in .claude/settings.json", "already configured", or "updated existing settings"]
+
 ### SDD Framework Detected:
 - [framework name, or "none"]
 
@@ -201,7 +262,7 @@ Then print the detailed summary:
 - [list each file updated, or "none", or "already integrated"]
 ```
 
-### 6. Getting Started Message
+### 7. Getting Started Message
 
 After the checklist and summary, print this getting-started message:
 
