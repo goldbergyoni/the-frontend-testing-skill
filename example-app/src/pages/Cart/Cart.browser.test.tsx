@@ -185,23 +185,18 @@ test(`When searching in the cart, then only matching products appear`, async () 
   await renderCart();
 
   // Act
-  await new Promise(resolve => setTimeout(resolve, 500));
-  vi.waitFor(() => {
-    return page.getByRole("region", { name: matchingProduct.title }).element();
-  });
-  const filterBox = page.getByRole("textbox", { name: "Search cart products" }).element();
-  filterBox.value = "Wireless";
+  await page.getByRole("textbox", { name: "Search cart products" }).fill("Wireless");
 
   // Assert
-  expect(page.getByRole("region", { name: nonMatchingProduct.title }).element()).not.toBeVisible();
-  expect(page.getByRole("region", { name: matchingProduct.title }).element()).toBeVisible();
+  await expect.element(page.getByRole("region", { name: nonMatchingProduct.title })).not.toBeInTheDocument();
+  await expect.element(page.getByRole("region", { name: matchingProduct.title })).toBeVisible();
 });
 
 test(`When searching for items in the cart, then only matching products appear`, async () => {
   // Arrange
   const [matchingProduct, nonMatchingProduct] = getProducts([
     { title: "Wireless Headphones" },
-    { title: "Cotton T-Shirt" },
+    { title: "Cotton T-Shirt" },  
   ]);
   mockAPIWithMSW(worker, "/carts/:cartId", [matchingProduct, nonMatchingProduct]);
   await renderCart();
