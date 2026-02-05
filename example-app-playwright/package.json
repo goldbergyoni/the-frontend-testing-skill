@@ -9,9 +9,6 @@
     "test": "vitest",
     "test:unit": "vitest --project=unit",
     "test:storybook": "vitest --project=storybook",
-    "test:browser": "vitest --project=browser",
-    "test:browser:coverage": "vitest --project=browser --coverage",
-    "test:browser:headed": "vitest --project=browser --browser.headless=false",
     "test:unit:ci": "vitest run --project=\"unit\" --reporter=verbose --reporter=junit --reporter=json --outputFile.json=./reports/unit-report.json --outputFile.junit=./reports/unit-report.xml --coverage --coverage.reporter=lcov --coverage.reportsDirectory=./coverage",
     "test:storybook:ci": "vitest run --project=\"storybook\" --reporter=verbose --reporter=junit --reporter=json --outputFile.json=./reports/storybook-report.json --outputFile.junit=./reports/storybook-report.xml --coverage --coverage.reporter=lcov --coverage.reportsDirectory=./coverage",
     "test:coverage": "vitest run --coverage",
@@ -61,8 +58,6 @@
     "@types/react-dom": "19.1.6",
     "@types/testing-library__jest-dom": "5.14.9",
     "@vitejs/plugin-react-swc": "3.10.2",
-    "@vitest/browser": "^4.0.6",
-    "@vitest/browser-playwright": "4.0.6",
     "@vitest/coverage-istanbul": "3.2.4",
     "eslint": "9.24.0",
     "eslint-config-prettier": "10.1.2",
@@ -88,8 +83,7 @@
     "vite": "6.4.1",
     "vite-plugin-checker": "0.10.1",
     "vite-tsconfig-paths": "5.1.4",
-    "vitest": "4.0.6",
-    "vitest-browser-react": "^2.0.2"
+    "vitest": "4.0.6"
   },
   "browserslist": {
     "production": [
