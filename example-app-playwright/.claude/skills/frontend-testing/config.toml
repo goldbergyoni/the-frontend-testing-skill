@@ -48,12 +48,12 @@ app_stop_command = "pids=$(lsof -ti tcp:3000); [ -n '$pids' ] && kill -9 $pids"
 
 # Command to run the test suite.
 # This is the primary command used after writing tests to verify they pass.
-test_run_command = "pnpm test:e2e"
+test_run_command = "pnpm test:page"
 
 # Command to run the test suite with coverage reporting.
 # Note: Playwright doesn't natively support coverage. Use test_run_command instead.
 # For coverage needs, consider Istanbul instrumentation or separate unit test coverage.
-test_run_command_with_coverage = "pnpm test:e2e"
+test_run_command_with_coverage = "pnpm test:page"
 
 # Command to stage changes for git.
 git_stage_command = "git add -A"
@@ -86,5 +86,5 @@ test_result_report = "test-results.md"
 [canonical_example]
 # A real test file that demonstrates all best practices.
 # Test writers should read this before writing their first test.
-path = "src/pages/Cart/Cart.e2e.test.ts"
+path = "src/pages/Cart/Cart.page.test.ts"
 title = "When API returns a few products, then they are all visible in the cart"

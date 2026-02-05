@@ -15,9 +15,8 @@
     "preview": "vite preview",
     "lint": "eslint . --ignore-pattern  '*.d.ts' --report-unused-disable-directives --max-warnings 0",
     "storybook": "storybook dev -p 6006",
-    "test:playwright": "playwright test -c playwright.config.ts",
-    "test:e2e": "playwright test -c playwright.config.ts",
-    "test:e2e:ui": "playwright test -c playwright.config.ts --ui"
+    "test:page": "playwright test -c playwright.config.ts",
+    "test:page:ui": "playwright test -c playwright.config.ts --ui"
   },
   "dependencies": {
     "@chakra-ui/icons": "2.1.1",
