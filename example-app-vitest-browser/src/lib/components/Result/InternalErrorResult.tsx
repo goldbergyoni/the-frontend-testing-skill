@@ -1,0 +1,31 @@
+import { ButtonGroup } from "@chakra-ui/react";
+import type { ReactNode } from "react";
+
+import { useTranslations } from "@/lib/i18n/useTransations";
+
+import { ContactUsButton } from "./Buttons/ContactUsButton";
+import { ErrorIcon } from "./Icons/ErrorIcon";
+import { Result } from "./Result";
+
+interface IProps {
+  children?: ReactNode;
+}
+
+const InternalErrorResult = ({ children }: IProps) => {
+  const t = useTranslations("shared.result.error");
+
+  return (
+    <Result
+      image={<ErrorIcon />}
+      heading={t("heading")}
+      subheading={t("description")}
+    >
+      <ButtonGroup>
+        <ContactUsButton />
+        {children}
+      </ButtonGroup>
+    </Result>
+  );
+};
+
+export { InternalErrorResult };

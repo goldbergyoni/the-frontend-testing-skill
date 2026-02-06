@@ -1,0 +1,31 @@
+{
+  "version": "1.0.0",
+  "name": "Frontend Testing Skills Marketplace",
+  "description": "A collection of Claude Code skills for frontend testing",
+  "skills": [
+    {
+      "id": "frontend-testing",
+      "name": "Frontend Testing Skill",
+      "version": "1.0.0",
+      "description": "Comprehensive testing skill with planning, analysis, verification workflow. 660+ best practices baked in.",
+      "author": "Frontend Testing Team",
+      "license": "MIT",
+      "source": "plugin/frontend-testing",
+      "tags": ["testing", "frontend", "playwright", "vitest", "e2e", "browser-testing"],
+      "commands": [
+        "/testskill.write-test",
+        "/testskill.plan",
+        "/testskill.verify",
+        "/testskill.review",
+        "/testskill.init"
+      ],
+      "agents": [
+        "testskill.planner",
+        "testskill.page-analyzer",
+        "testskill.verifier",
+        "testskill.healer",
+        "testskill.locator-fixer"
+      ]
+    }
+  ]
+}

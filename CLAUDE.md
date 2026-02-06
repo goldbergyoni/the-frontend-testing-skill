@@ -8,41 +8,80 @@ This is **The Frontend Testing Skill** - a Claude Code skill that orchestrates c
 
 **Core Philosophy**: The "Double Gate 🌉 Principle" - test planning is the first task in any workflow, test verification is the last. Testing is integrated throughout development, not separate.
 
-## Key Commands
+## Repository Structure
 
-All commands are configured in `/skills/testing/config.toml`:
+```
+the-frontend-testing-skill/
+├── the-testing-skill/           # The distributable skill package
+│   ├── agents/                  # 5 specialized agents
+│   ├── commands/                # Slash command definitions
+│   └── skills/testing/          # Core documentation & config
+│       ├── config.toml          # Framework & workflow settings
+│       ├── test-workflow.md     # Double Gate workflow (CRITICAL)
+│       └── patterns-and-practices/  # Best practice guides
+├── example-app-playwright/      # Demo app with Playwright page tests
+├── example-app-vitest-browser/  # Demo app with Vitest Browser Mode tests
+└── docs/demo/                   # Presentation materials
+```
+
+## Development Commands
+
+### Example App: Playwright (`example-app-playwright/`)
+
+```bash
+cd example-app-playwright && pnpm install
+
+pnpm dev                  # Start dev server (port 5173)
+pnpm test:page            # Run Playwright page tests
+pnpm test:page:ui         # Run Playwright tests with UI
+pnpm test:unit            # Run Vitest unit tests
+pnpm test:storybook       # Run Storybook tests
+pnpm lint --fix           # Fix lint errors
+```
+
+### Example App: Vitest Browser (`example-app-vitest-browser/`)
+
+```bash
+cd example-app-vitest-browser && pnpm install
+
+pnpm dev                  # Start dev server (port 5173)
+pnpm test:browser         # Run Vitest browser mode tests
+pnpm test:browser:headed  # Run browser tests with visible browser
+pnpm test:unit            # Run Vitest unit tests
+pnpm lint --fix           # Fix lint errors
+```
+
+### Running Single Tests
+
+```bash
+# Playwright (from example-app-playwright/)
+pnpm test:page -g "test title pattern"
+pnpm test:page path/to/test.spec.ts
+
+# Vitest (from either example app)
+pnpm test:unit -t "test title pattern"
+pnpm test:browser path/to/test.browser.tsx
+```
+
+## Skill Commands (Slash Commands)
 
 | Command | Purpose |
 |---------|---------|
-| `/testskill.write-test <page-name>` | Full test workflow (plan → analyze → write → verify) |
+| `/testskill.write-test <page-name>` | Full workflow: plan → analyze → write → verify |
 | `/testskill.plan <page-name>` | Create test plan only |
 | `/testskill.verify <test-plan.md-path>` | Verify tests after writing |
 | `/testskill.review <test-file-path>` | Review test file against best practices |
 | `/testskill.init` | Initialize skill in a project |
 
-**Test Commands** (from config.toml):
-- Run tests: `npm run test:page:ui`
-- Run with coverage: `npm run test:page:coverage`
-- Start app: `npm run start:staging-new`
+## Agents
 
-## Architecture
-
-```
-the-frontend-testing-skill/
-├── agents/                    # 5 specialized agents for testing workflows
-│   ├── testskill.planner.md   # Creates test-plan.md with coverage baseline
-│   ├── testskill.verifier.md  # Verifies tests pass & meet quality standards
-│   ├── testskill.page-analyzer.md  # Analyzes pages before test writing (MANDATORY)
-│   ├── testskill.healer.md    # Debug & fix failing tests (placeholder)
-│   └── testskill.locator-fixer.md  # Add ARIA attributes (placeholder)
-├── commands/                  # CLI command definitions
-├── skills/testing/            # Core skill with all documentation
-│   ├── SKILL.md               # Main skill definition & index
-│   ├── config.toml            # Configuration (framework, commands, paths)
-│   ├── test-workflow.md       # CRITICAL: Double Gate workflow
-│   └── patterns-and-practices/  # 9 best practice guides
-└── docs/demo/                 # Demo materials
-```
+| Agent | Role |
+|-------|------|
+| `testskill.planner` | Creates test plans with coverage targets |
+| `testskill.page-analyzer` | Inspects live app for network calls, state, UI structure |
+| `testskill.verifier` | Runs tests, checks quality, generates reports |
+| `testskill.healer` | Debugs and fixes failing tests |
+| `testskill.locator-fixer` | Adds ARIA attributes for stable selectors |
 
 ## Mandatory Workflow
 
@@ -55,10 +94,9 @@ the-frontend-testing-skill/
 
 ## Critical Files to Read
 
-1. `/skills/testing/test-workflow.md` - The mandatory workflow sequence
-2. `/skills/testing/patterns-and-practices/the-test-anatomy.md` - 6 critical rules for test structure
-3. `/skills/testing/config.toml` - Project-specific configuration
-4. Canonical example test: `src2/pages/Teams/test/Teams.integration.spec.tsx`
+1. `the-testing-skill/skills/testing/test-workflow.md` - The mandatory workflow sequence
+2. `the-testing-skill/skills/testing/patterns-and-practices/the-test-anatomy.md` - 6 critical rules
+3. `the-testing-skill/skills/testing/config.toml` - Configuration template
 
 ## Test Writing Rules (Summary)
 
@@ -75,22 +113,15 @@ The 6 most critical rules from `the-test-anatomy.md`:
 
 **Test structure**: AAA (Arrange-Act-Assert) with clear phase separation
 
-## Configuration
+## Configuration (config.toml)
 
-`/skills/testing/config.toml` controls:
+When installing the skill in a project, `config.toml` controls:
 
 - **Workflow enforcement**: `stop_when_no_plan`, `stop_when_no_page_analysis`, `must_have_human_review_of_plan`
-- **Frameworks**: vitest, vitest-browser-mode, msw
+- **Frameworks**: vitest, vitest-browser-mode, playwright, msw
 - **Commands**: App start/stop, test run, git staging
 - **Paths**: Test context artifacts location
-- **App URLs**: Frontend at localhost:3000
-
-## MCP Servers Required
-
-The skill uses three MCP servers (installed via `/testskill.init`):
-- `@playwright/mcp` - Browser automation
-- `test-coverage-mcp` - Coverage tracking and comparison
-- `playwright-test` - Test execution
+- **Canonical example**: Path to a reference test file in the target project
 
 ## Test Types (Priority Order)
 
