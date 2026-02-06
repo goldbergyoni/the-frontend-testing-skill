@@ -14,22 +14,56 @@ This is **The Frontend Testing Skill** - a Claude Code skill that orchestrates c
 the-frontend-testing-skill/
 ├── the-testing-skill/           # The distributable skill package
 │   ├── agents/                  # 5 specialized agents
-│   │   ├── testskill.planner.md
-│   │   ├── testskill.verifier.md
-│   │   ├── testskill.page-analyzer.md
-│   │   ├── testskill.healer.md
-│   │   └── testskill.locator-fixer.md
 │   ├── commands/                # Slash command definitions
 │   └── skills/testing/          # Core documentation & config
 │       ├── config.toml          # Framework & workflow settings
 │       ├── test-workflow.md     # Double Gate workflow (CRITICAL)
-│       └── patterns-and-practices/  # 9 best practice guides
-├── example-app-playwright/      # Demo app with Playwright tests
-├── example-app-vitest-browser/  # Demo app with Vitest Browser Mode
+│       └── patterns-and-practices/  # Best practice guides
+├── example-app-playwright/      # Demo app with Playwright page tests
+├── example-app-vitest-browser/  # Demo app with Vitest Browser Mode tests
 └── docs/demo/                   # Presentation materials
 ```
 
-## Key Commands
+## Development Commands
+
+### Example App: Playwright (`example-app-playwright/`)
+
+```bash
+cd example-app-playwright && pnpm install
+
+pnpm dev                  # Start dev server (port 5173)
+pnpm test:page            # Run Playwright page tests
+pnpm test:page:ui         # Run Playwright tests with UI
+pnpm test:unit            # Run Vitest unit tests
+pnpm test:storybook       # Run Storybook tests
+pnpm lint --fix           # Fix lint errors
+```
+
+### Example App: Vitest Browser (`example-app-vitest-browser/`)
+
+```bash
+cd example-app-vitest-browser && pnpm install
+
+pnpm dev                  # Start dev server (port 5173)
+pnpm test:browser         # Run Vitest browser mode tests
+pnpm test:browser:headed  # Run browser tests with visible browser
+pnpm test:unit            # Run Vitest unit tests
+pnpm lint --fix           # Fix lint errors
+```
+
+### Running Single Tests
+
+```bash
+# Playwright (from example-app-playwright/)
+pnpm test:page -g "test title pattern"
+pnpm test:page path/to/test.spec.ts
+
+# Vitest (from either example app)
+pnpm test:unit -t "test title pattern"
+pnpm test:browser path/to/test.browser.tsx
+```
+
+## Skill Commands (Slash Commands)
 
 | Command | Purpose |
 |---------|---------|
@@ -38,6 +72,16 @@ the-frontend-testing-skill/
 | `/testskill.verify <test-plan.md-path>` | Verify tests after writing |
 | `/testskill.review <test-file-path>` | Review test file against best practices |
 | `/testskill.init` | Initialize skill in a project |
+
+## Agents
+
+| Agent | Role |
+|-------|------|
+| `testskill.planner` | Creates test plans with coverage targets |
+| `testskill.page-analyzer` | Inspects live app for network calls, state, UI structure |
+| `testskill.verifier` | Runs tests, checks quality, generates reports |
+| `testskill.healer` | Debugs and fixes failing tests |
+| `testskill.locator-fixer` | Adds ARIA attributes for stable selectors |
 
 ## Mandatory Workflow
 
@@ -74,27 +118,10 @@ The 6 most critical rules from `the-test-anatomy.md`:
 When installing the skill in a project, `config.toml` controls:
 
 - **Workflow enforcement**: `stop_when_no_plan`, `stop_when_no_page_analysis`, `must_have_human_review_of_plan`
-- **Frameworks**: vitest, vitest-browser-mode, playwright, msw, etc.
+- **Frameworks**: vitest, vitest-browser-mode, playwright, msw
 - **Commands**: App start/stop, test run, git staging
 - **Paths**: Test context artifacts location
 - **Canonical example**: Path to a reference test file in the target project
-
-## Example Apps
-
-The repository includes working example applications demonstrating skill integration:
-
-- **example-app-playwright/**: React + Vite app with Playwright-based browser tests
-- **example-app-vitest-browser/**: React + Vite app with Vitest Browser Mode tests
-
-Both use: React 19, Vite, MSW for API mocking, Chakra UI, React Query.
-
-Run tests in example apps:
-```bash
-cd example-app-playwright
-pnpm install
-pnpm test:browser        # Vitest browser tests
-pnpm test:e2e            # Playwright E2E tests
-```
 
 ## Test Types (Priority Order)
 

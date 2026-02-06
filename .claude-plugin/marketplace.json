@@ -1,0 +1,15 @@
+{
+  "name": "frontend-testing-marketplace",
+  "owner": {
+    "name": "Frontend Testing Team",
+    "email": "team@example.com"
+  },
+  "plugins": [
+    {
+      "name": "frontend-testing",
+      "source": "./plugin/frontend-testing",
+      "description": "Comprehensive guide and tools for writing frontend tests. 660+ best practices, specialized agents for planning, analysis, verification, and healing.",
+      "version": "1.1.0"
+    }
+  ]
+}

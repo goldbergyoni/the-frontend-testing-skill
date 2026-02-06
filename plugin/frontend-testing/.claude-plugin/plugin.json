@@ -1,0 +1,22 @@
+{
+  "name": "frontend-testing",
+  "version": "1.1.0",
+  "description": "Comprehensive guide and tools for writing frontend tests. Must be read before planning features, during tasks creation, while coding features or testing.",
+  "author": "Frontend Testing Team",
+  "license": "MIT",
+  "keywords": ["testing", "frontend", "playwright", "vitest", "e2e", "browser-testing"],
+  "commands": [
+    "testskill.init",
+    "testskill.plan",
+    "testskill.write-test",
+    "testskill.verify",
+    "testskill.review"
+  ],
+  "agents": [
+    "testskill.planner",
+    "testskill.page-analyzer",
+    "testskill.verifier",
+    "testskill.healer",
+    "testskill.locator-fixer"
+  ]
+}
