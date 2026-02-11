@@ -1,0 +1,17 @@
+{
+  "name": "frontend-testing-skill-marketplace",
+  "metadata": {
+    "description": "Frontend testing skills and agents for Claude Code"
+  },
+  "owner": {
+    "name": "Frontend Testing Team"
+  },
+  "plugins": [
+    {
+      "name": "frontend-testing",
+      "source": "./plugin/frontend-testing",
+      "description": "Comprehensive guide and tools for writing frontend tests. 660+ best practices, specialized agents for planning, analysis, verification, and healing.",
+      "version": "1.1.0"
+    }
+  ]
+}

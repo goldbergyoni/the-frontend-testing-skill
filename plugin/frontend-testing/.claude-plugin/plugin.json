@@ -1,0 +1,10 @@
+{
+  "name": "frontend-testing",
+  "description": "Comprehensive guide and tools for writing frontend tests. Must be read before planning features, during tasks creation, while coding features or testing.",
+  "version": "1.1.0",
+  "author": {
+    "name": "Frontend Testing Team"
+  },
+  "license": "MIT",
+  "keywords": ["testing", "frontend", "playwright", "vitest", "e2e", "browser-testing"]
+}
