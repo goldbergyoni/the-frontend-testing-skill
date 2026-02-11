@@ -2,14 +2,6 @@
 
 **When to use:** When testing React components with testing-library, Playwright, StoryBook, or similar frameworks.
 
-> **Framework Translation:** Locator syntax is similar across frameworks:
-> | Vitest Browser Mode | Playwright |
-> |---------------------|------------|
-> | `screen.getByRole()` | `page.getByRole()` |
-> | `screen.getByLabelText()` | `page.getByLabel()` |
-> | `screen.getByText()` | `page.getByText()` |
-> | `screen.getByPlaceholder()` | `page.getByPlaceholder()` |
-
 ---
 
 ## Section F - Testing with DOM

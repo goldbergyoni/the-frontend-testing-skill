@@ -4,12 +4,6 @@
 
 These rules are not applicable to end-to-end tests that span multiple processes and components, only for unit, integration, component, Microservice, API tests. If you realize tests that don't mock the backend, these are end-to-end tests, in this case apply the rules from [system-wide-e2e-best-practices.md](./system-wide-e2e-best-practices.md).
 
-> **Framework Translation Note:** Examples use either `screen.` (Vitest Browser Mode) or `page.` (Playwright) syntax. The locator APIs are similar - translate to your framework:
-> - Vitest: `screen.getByRole('button', { name: 'Submit' })`
-> - Playwright: `page.getByRole('button', { name: 'Submit' })`
->
-> Check `config.toml → integration_test_framework` for your project's framework.
-
 ---
 
 ## The 6 Most Important (!) Rules

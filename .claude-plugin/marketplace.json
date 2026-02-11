@@ -1,8 +1,10 @@
 {
-  "name": "frontend-testing-marketplace",
+  "name": "frontend-testing-skill-marketplace",
+  "metadata": {
+    "description": "Frontend testing skills and agents for Claude Code"
+  },
   "owner": {
-    "name": "Frontend Testing Team",
-    "email": "team@example.com"
+    "name": "Frontend Testing Team"
   },
   "plugins": [
     {
